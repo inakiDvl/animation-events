@@ -1,4 +1,4 @@
-# Animation events
+# Unity animation events
 It's a system that makes it easier to synchronize events and animations with the help of a simple editor tool.
 
 It uses ID's to link an animation frame with an event. It doesn't care about classes or methods;
