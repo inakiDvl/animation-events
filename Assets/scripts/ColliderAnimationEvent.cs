@@ -1,29 +1,17 @@
 using UnityEngine;
 
-public class ColliderAnimationEvent : MonoBehaviour, IAnimationEventTriggerer
+public class ColliderAnimationEvent : AnimationEventTriggerer
 {
+    // This id must match the id of the CustomAnimationEvent that is in the AnimationData.
     [SerializeField] private int id;
 
-    private AnimationController animationController;
-
-    public int GetId()
+    public override int GetId()
     {
-        throw new System.NotImplementedException();
+        return id;
     }
 
-    public void TriggerEvent()
+    public override void TriggerEvent()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Event triggerd.");
     }
-
-    private void Awake()
-    {
-        animationController = GetComponent<AnimationController>();
-    }
-}
-
-public interface IAnimationEventTriggerer
-{
-    public int GetId();
-    public void TriggerEvent();
 }
