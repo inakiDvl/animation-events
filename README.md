@@ -26,11 +26,40 @@ it can trigger anything. There is no need to inherit from any class or implement
 3. What ever you want to trigger
     - Place what ever you want to trigger next to the AnimationEventTriggerer.
     - I have created two scripts, one that enables a GameObject and another that disables it.
+        
+        ![alt text](images/image-3.png)
+    - Make sure that your script subscribes to the action that's in the AnimationEventTriggerer.
+        ```csharp
+        public class EnableObjectEvent : MonoBehaviour
+        {
+            [SerializeField] private int id;
+            [SerializeField] private GameObject targetCollider;
 
-        ![alt text](images/images/image-3.png)
-    - Make sure that your scripts subscribe to the action that's in the AnimationEventTriggerer.
+            private AnimationEventContoller animationEventContoller;
 
-        ![alt text](images/image-4.png)
+            private void EnableCollider(int id)
+            {
+                if (this.id != id)
+                    return;
+
+                targetCollider.SetActive(true);
+            }
+
+            private void Awake()
+            {
+                animationEventContoller = GetComponent<AnimationEventContoller>();
+            }
+
+            private void OnEnable()
+            {
+                animationEventContoller.OnEventTriggerd += EnableCollider;
+            }
+
+            private void OnDisable()
+            {
+                animationEventContoller.OnEventTriggerd -= EnableCollider;
+            }
+        }
     - Make sure the ID of your script and matches with the ID of the AnimationEventTriggerer.
 
 ## Summary
