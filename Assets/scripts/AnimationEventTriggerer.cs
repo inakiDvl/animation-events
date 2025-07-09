@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EventTriggerer : StateMachineBehaviour
+public class AnimationEventTriggerer : StateMachineBehaviour
 {
     [SerializeField] private string description;
     [SerializeField] private int id;
