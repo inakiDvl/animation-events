@@ -8,38 +8,20 @@ public class AnimationController : MonoBehaviour
     public AnimationData animationData; 
     public bool playAnimation = false;
 
-    [SerializeField] private Animator animator;
-    [SerializeField] private List<AnimationEventTriggerer> triggerers = new();
-
-    private const float crossFadeTime = 0.15f;
+    public event Action<int> OnExposeEventId;
 
     public void PlayAnimation(AnimationData animation)
     {
-        // animator.CrossFadeInFixedTime(animation.NameHash, crossFadeTime);
-        CheckTriggerers(animation);
+        // Here we should tell the animator to play the animation.
+
+        ExposeEventsIds(animation);
     }
 
-    private void CheckTriggerers(AnimationData animation)
+    private void ExposeEventsIds(AnimationData animation)
     {
-        bool foundMatchingId = false;
-
-        foreach (var triggerer in triggerers)
+        foreach (var animationEvent in animation.AnimationEvents)
         {
-            int triggererId = triggerer.GetId();
-
-            if (foundMatchingId)
-            {
-                triggerer.TriggerEvent();
-                break;
-            }
-
-            foreach (var animationEvent in animation.AnimationEvents)
-            {
-                int animationEventId = animationEvent.Id;
-
-                if (triggererId == animationEventId)
-                    foundMatchingId = true;
-            }
+            OnExposeEventId?.Invoke(animationEvent.Id);
         }
     }
 

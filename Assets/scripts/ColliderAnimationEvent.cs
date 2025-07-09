@@ -1,17 +1,25 @@
 using UnityEngine;
 
-public class ColliderAnimationEvent : AnimationEventTriggerer
+public class ColliderAnimationEvent : MonoBehaviour
 {
-    // This id must match the id of the CustomAnimationEvent that is in the AnimationData.
-    [SerializeField] private int id;
+    [SerializeField] private AnimationController animationController;
+    [SerializeField] private int id; // This id must match the id of the CustomAnimationEvent that is in the AnimationData.
 
-    public override int GetId()
+    private void CheckId(int id)
     {
-        return id;
+        if (this.id != id)
+            return;
+
+        Debug.Log("fire event");
     }
 
-    public override void TriggerEvent()
+    private void OnEnable()
     {
-        Debug.Log("Event triggerd.");
+        animationController.OnExposeEventId += CheckId;
+    }
+    
+    private void OnDisable()
+    {
+        animationController.OnExposeEventId -= CheckId;
     }
 }
