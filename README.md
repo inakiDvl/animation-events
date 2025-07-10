@@ -4,8 +4,10 @@ It's a system that makes it easier to synchronize events and animations with the
 It uses ID's to link an animation frame with an event. It doesn't care about classes or methods;
 it can trigger anything. There is no need to inherit from any class or implement any method.
 
-## How to use: 
-
+Here we can see how its used to enable and disable a collider at a concrete moment of the animation:
+    
+![alt text](gif.gif)
+## How to use:
 1. AnimationEventController
     - Place it mext to the animator.
 
