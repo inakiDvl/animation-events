@@ -16,7 +16,7 @@ public class AnimationEventTriggerer : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         float currentTime = stateInfo.normalizedTime % 1;
-
+        
         if (currentTime < normalizedTriggerTime)
             triggered = false;
             
